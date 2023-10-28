@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ricambi Auto</title>
+    <style>
+        /* Stili CSS per la pagina dei ricambi */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f0f0;
+        }
+        header {
+            background-color: #333;
+            color: #fff;
+            text-align: center;
+            padding: 10px;
+        }
+        nav {
+            background-color: #333;
+            color: #fff;
+            text-align: center;
+            padding: 10px;
+        }
+        nav a {
+            color: #fff;
+            text-decoration: none;
+            padding: 10px 20px;
+        }
+        .content {
+            max-width: 800px;
+            margin: 20px auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 5px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            border: 1px solid #ccc;
+            padding: 10px;
+            text-align: left;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Ricambi Auto</h1>
+    </header>
+    <nav>
+        <a href="index.html">Home</a>
+        <a href="ricambi.html">Ricambi</a>
+        <a href="assistenza.html">Assistenza</a>
+    </nav>
+    <div class="content">
+		<h1>Fendinebbia</h1>
+		<a href="/new" class="blue-button">Aggiungi fendinebbia</a> <br />
+		<br />
+        <table>	
+            <thead>
+                <tr>
+                    <th>Id Fendinebbia</th>
+                    <th>Lato</th>
+                    <th>Anno</th>
+                    <th>Modelli Compatibili</th>
+                    <th>Codici</th>
+                    <th>Restyling</th>
+                    <th>Id Modelli (FK)</th>
+                </tr>
+            </thead>
+            <tbody>
+				<tr th:each="fen : ${listaFen}">
+					<td th:text="${fen.idFendinebbia}">Id Fendinebbia</td>
+					<td th:text="${fen.lato}">Lato</td>
+					<td th:text="${fen.anno}">Anno</td>
+					<td th:text="${fen.modelliCompatibili}">Modelli Compatibili</td>
+					<td th:text="${fen.codici}">Codici</td>
+					<td th:text="${fen.restyling}">Restyling</td>
+					<td th:text="${fen.idModello.getId()}">Id Modello</td>
+
+					<td><a th:href="@{'/edit/' + ${fen.idFendinebbia}}">Modifica</a>	
+						&nbsp;&nbsp;&nbsp; <a th:href="@{'/delete/' + ${fen.idFendinebbia}}">Elimina
+					</a></td>
+                </tr>
+            </tbody>
+        </table>
+       		<form th:action="@{/search}">
+   				<input type="text" id="modello" name="modello" />
+   				<button type="submit" class="blue-button">Cerca per modello</button>
+			</form>
+		<a href="/" class="blue-button">Visualiza tutti</a> <br />
+<!-- 	
+Esempio di mescolanza tra pathVariable e RequestParam
+<form th:action = "@{'/carrello/' + ${pd.id} (quantita=*{value})}">
+-->	
+    </div>
+</body>
+</html>
